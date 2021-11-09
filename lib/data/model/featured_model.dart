@@ -21,9 +21,9 @@ class FeaturedModel {
     return FeaturedModel(
       backdropPath: map['backdrop_path'] as String?,
       posterPath: map['poster_path'] as String?,
-      name: map['name'] as String?,
-      firstAirDate: stringToDate(map['first_air_date']),
-      originalName: map['original_name'] as String?,
+      name: (map['name'] == null) ? map['title'] : map['name'] as String?,
+      firstAirDate: stringToDate((map['first_air_date'] == null) ? map['release_date'] : map['first_air_date']),
+      originalName: map['original_name'],
       overview: map['overview'] as String?,
       voteAverage: map['vote_average'] as dynamic,
     );

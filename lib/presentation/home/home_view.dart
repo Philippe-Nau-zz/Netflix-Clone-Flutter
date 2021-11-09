@@ -21,34 +21,41 @@ class HomeView extends StatelessWidget {
       body: Stack(
         children: [
           RefreshIndicator(
-            onRefresh: () => _bloc.fetchHomeItems(),
+            onRefresh: () => _bloc.fetchHomeItems(false),
+            edgeOffset: 50,
+            triggerMode: RefreshIndicatorTriggerMode.anywhere,
+            backgroundColor: ColorPalette.kDarkGrey,
+            color: ColorPalette.kRed,
             child: BlocConsumer<HomeCubit, HomeState>(
               listener: (context, state) {
                 if (state is HomeLoadSucess) {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+                  if (state.showBottomSheet)
+                    showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
                       ),
-                    ),
-                    builder: (context) => InfoBottomSheet(),
-                  );
+                      builder: (context) => InfoBottomSheet(),
+                    );
                 }
               },
               builder: (context, state) {
-                final _index = _bloc.indexFeatured;
+                final _indexFeatured = _bloc.indexFeatured;
+                final _indexResultModel = _bloc.indexResultModel;
                 if (state is HomeLoadSucess) {
                   final _resultModelLenght = state.resultModel?.length ?? 0;
                   return SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
                     controller: _bloc.scrollController,
                     child: Stack(
                       children: [
                         FeaturedDetail(
                           height: _size.height * 0.6,
                           urlImage:
-                              '${NetworkAddres.kNetflixFeatured}${state.resultModel?[1].results?[_index].backdropPath}',
+                              '${NetworkAddres.kNetflixFeatured}${state.resultModel?[_indexResultModel].results?[_indexFeatured].backdropPath}',
                         ),
                         Column(
                           mainAxisSize: MainAxisSize.min,
@@ -57,13 +64,13 @@ class HomeView extends StatelessWidget {
                               width: _size.width,
                               height: _size.height * 0.5,
                               name:
-                                  '${state.resultModel?[0].results?[_index].name}',
+                                  '${state.resultModel?[_indexResultModel].results?[_indexFeatured].name}',
                               voteAverage:
-                                  '${state.resultModel?[0].results?[_index].voteAverage}',
+                                  '${state.resultModel?[_indexResultModel].results?[_indexFeatured].voteAverage}',
                               year:
-                                  '${state.resultModel?[0].results?[_index].firstAirDate?.year}',
+                                  '${state.resultModel?[_indexResultModel].results?[_indexFeatured].firstAirDate?.year}',
                               description:
-                                  '${state.resultModel?[0].results?[_index].overview}',
+                                  '${state.resultModel?[_indexResultModel].results?[_indexFeatured].overview}',
                             ),
                             _ListArea(
                               height: (260 * _resultModelLenght).toDouble(),
@@ -75,7 +82,7 @@ class HomeView extends StatelessWidget {
                     ),
                   );
                 }
-          
+
                 return const Center(
                   child: CircularProgressIndicator(
                     color: ColorPalette.kRed,
