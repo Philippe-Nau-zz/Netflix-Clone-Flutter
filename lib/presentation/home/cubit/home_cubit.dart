@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:netflix_clone/data/model/result_model.dart';
 import 'package:netflix_clone/data/repository/home_repository.dart';
@@ -9,12 +11,14 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepository _homeRepository = HomeRepository();
+  final ScrollController scrollController = ScrollController();
 
   HomeCubit() : super(HomeLoadInProgress());
 
   int indexFeatured = 0;
+  int indexResultModel = 0;
 
-  Future<void> fetchHomeItems() async {
+  Future<void> fetchHomeItems([bool showBottomSheet = true]) async {
     final List<ResultModel> _listResultModel = [];
     ResultModel _original = await fetchOriginals();
     ResultModel _trending = await fetchTrendings();
@@ -36,7 +40,12 @@ class HomeCubit extends Cubit<HomeState> {
     ]);
 
     randomFeatured(_listResultModel);
-    emit(HomeLoadSucess(_listResultModel));
+    emit(
+      HomeLoadSucess(
+        resultModel: _listResultModel,
+        showBottomSheet: showBottomSheet,
+      ),
+    );
   }
 
   Future<ResultModel> fetchOriginals() async {
@@ -120,6 +129,9 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   randomFeatured(List<ResultModel> list) {
-    indexFeatured = Random().nextInt(list.length);
+      indexResultModel = Random().nextInt(list.length -1);
+    do {
+      indexFeatured = Random().nextInt(list[indexResultModel].results?.length ?? 0);
+    } while (list[0].results?[indexFeatured].backdropPath == null);
   }
 }

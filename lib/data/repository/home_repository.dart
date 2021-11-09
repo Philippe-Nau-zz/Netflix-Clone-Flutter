@@ -6,7 +6,7 @@ import 'package:netflix_clone/utils/network_addres.dart';
 
 class HomeRepository {
 
-  Future<Either<String, ResultModel>> fetchNetflixOriginal() async {
+   Future<Either<String, ResultModel>> fetchNetflixOriginal() async {
     try {
       final _response = await http.get(NetworkAddres.kNetflixOriginal);
       if (_response.statusCode == 200) {

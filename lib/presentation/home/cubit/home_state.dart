@@ -7,6 +7,9 @@ class HomeLoadInProgress extends HomeState {}
 
 class HomeLoadSucess extends HomeState {
   final List<ResultModel>? resultModel;
-  HomeLoadSucess(this.resultModel);
+  final bool showBottomSheet;
+  HomeLoadSucess({
+    this.resultModel,
+    this.showBottomSheet = true,
+  });
 }
-class HomeLoadFailure extends HomeState {}
