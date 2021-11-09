@@ -1,5 +1,5 @@
 class NetworkAddres{
-static const kApiKey = 'b864df85a849c092abeb6c585a550aa4';
+static const kApiKey = '';
 static const kBaseUrl = 'https://api.themoviedb.org/3';
 static Uri kNetflixOriginal = Uri.parse('$kBaseUrl/discover/tv?with_network=213&language=pt-BR&api_key=$kApiKey');
 static Uri kNetflixTrending = Uri.parse('$kBaseUrl/trending/all/week?language=pt-BR&api_key=$kApiKey');
