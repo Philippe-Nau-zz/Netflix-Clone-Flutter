@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:netflix_clone/data/model/result_model.dart';
 import 'package:netflix_clone/data/repository/home_repository.dart';
@@ -9,6 +11,7 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepository _homeRepository = HomeRepository();
+  final ScrollController scrollController = ScrollController();
 
   HomeCubit() : super(HomeLoadInProgress());
 
@@ -120,6 +123,9 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   randomFeatured(List<ResultModel> list) {
-    indexFeatured = Random().nextInt(list.length);
+    do {
+      indexFeatured = Random().nextInt(list.length);
+    } while (list[0].results?[indexFeatured].backdropPath == null);
   }
+
 }

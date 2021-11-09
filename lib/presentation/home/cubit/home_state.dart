@@ -9,4 +9,3 @@ class HomeLoadSucess extends HomeState {
   final List<ResultModel>? resultModel;
   HomeLoadSucess(this.resultModel);
 }
-class HomeLoadFailure extends HomeState {}
