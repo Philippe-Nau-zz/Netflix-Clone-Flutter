@@ -23,6 +23,9 @@ class AppTheme {
       bodyText1: TextStyle(
         color: ColorPalette.kGrey,
       ),
+      button: TextStyle(
+        color: ColorPalette.kWhite.withOpacity(0.8),
+      )
     ),
   );
 }
