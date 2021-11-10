@@ -7,6 +7,7 @@ import 'package:netflix_clone/presentation/home/widgets/featured_detail.dart';
 import 'package:netflix_clone/presentation/home/widgets/movie_row.dart';
 import 'package:netflix_clone/utils/color_palette.dart';
 import 'package:netflix_clone/utils/network_addres.dart';
+import 'package:netflix_clone/widgets/exception_bottom_sheet.dart';
 import 'package:netflix_clone/widgets/info_bottom_sheet.dart';
 
 class HomeView extends StatelessWidget {
@@ -40,6 +41,21 @@ class HomeView extends StatelessWidget {
                       ),
                       builder: (context) => InfoBottomSheet(),
                     );
+                }
+                if (state is HomeLoadFailure) {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    builder: (context) => ExceptionBottomSheet(
+                      error: state.error,
+                      onTap: () => _bloc.fetchHomeItems(),
+                    ),
+                  );
                 }
               },
               builder: (context, state) {

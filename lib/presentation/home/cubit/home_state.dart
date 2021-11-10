@@ -4,6 +4,11 @@ part of 'home_cubit.dart';
 abstract class HomeState {}
 
 class HomeLoadInProgress extends HomeState {}
+class HomeLoadFailure extends HomeState {
+  final String error;
+
+  HomeLoadFailure(this.error);
+}
 
 class HomeLoadSucess extends HomeState {
   final List<ResultModel>? resultModel;
