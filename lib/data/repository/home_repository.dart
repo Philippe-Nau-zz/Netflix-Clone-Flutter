@@ -13,8 +13,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Originais da Netflix');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -27,8 +30,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Recomendados para Você');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -41,8 +47,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Em Alta');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -55,8 +64,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Ação');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -69,8 +81,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Comédia');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -83,8 +98,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Terror');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -97,8 +115,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Romance');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
@@ -111,8 +132,11 @@ class HomeRepository {
         final _decoded = jsonDecode(_response.body);
         final _data = ResultModel.fromMap(_decoded, slug: 'Documentátios');
         return Right(_data);
+      }else if(_response.statusCode == 401){
+        return Left('API KEY inválida');
+      }else{
+        return Left('Não foi possível obter uma resposta, tente novamente mais tarde');
       }
-      return Left('value');
     } on Exception catch (e) {
       throw e;
     }
